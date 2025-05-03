@@ -1,13 +1,20 @@
-import React from "react";
+import React, { use } from "react";
 import { Link } from "react-router";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Register = () => {
+  const { createUser } = use(AuthContext);
+
   const handleRegister = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
     const photoUrl = e.target.photoUrl.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
+    console.log(name, photoUrl, email, password);
+    createUser(email, password)
+      .then((result) => console.log(result))
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -25,6 +32,7 @@ const Register = () => {
               name="name"
               className="input"
               placeholder="Name"
+              required
             />
 
             {/* Photo Url */}
@@ -34,6 +42,7 @@ const Register = () => {
               name="photoUrl"
               className="input"
               placeholder="Photo URL"
+              required
             />
 
             {/* Email */}
@@ -43,6 +52,7 @@ const Register = () => {
               name="email"
               className="input"
               placeholder="Email"
+              required
             />
 
             {/* Password */}
@@ -53,10 +63,11 @@ const Register = () => {
               className="input"
               placeholder="Password"
               autoComplete="yes"
+              required
             />
 
             <button type="submit" className="btn btn-neutral mt-4">
-              Login
+              Resgister
             </button>
             <p className="font-semibold text-center pt-5">
               Already Have An Account ?{" "}
