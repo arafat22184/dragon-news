@@ -2,12 +2,12 @@ import React from "react";
 
 const LoadingSpinner = () => {
   return (
-    <>
-      <span className="loading loading-ring loading-xl"></span>
-      <span className="loading loading-ring loading-xl"></span>
-      <span className="loading loading-ring loading-xl"></span>
-      <span className="loading loading-ring loading-xl"></span>
-    </>
+    <div className="min-h-screen flex justify-center items-center gap-5">
+      <span className="loading loading-bars loading-xl"></span>
+      <span className="loading loading-bars loading-xl"></span>
+      <span className="loading loading-bars loading-xl"></span>
+      <span className="loading loading-bars loading-xl"></span>
+    </div>
   );
 };
 
