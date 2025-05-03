@@ -1,9 +1,10 @@
-import React, { use } from "react";
+import React, { use, useState } from "react";
 import { Link } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const Register = () => {
-  const { createUser } = use(AuthContext);
+  const [nameError, setNameError] = useState("");
+  const { setUser, createUser, updateUser } = use(AuthContext);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -11,9 +12,22 @@ const Register = () => {
     const photoUrl = e.target.photoUrl.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(name, photoUrl, email, password);
+
+    if (name.length < 5) {
+      setNameError("name should be more than 5 character");
+    } else {
+      setNameError("");
+    }
+
     createUser(email, password)
-      .then((result) => console.log(result))
+      .then((result) => {
+        const user = result.user;
+        updateUser({ displayName: name, photoURL: photoUrl })
+          .then(() => {
+            setUser({ ...user, displayName: name, photoURL: photoUrl });
+          })
+          .catch(() => setUser(user));
+      })
       .catch((error) => console.log(error));
   };
 
@@ -65,6 +79,8 @@ const Register = () => {
               autoComplete="yes"
               required
             />
+
+            {nameError && <p className="text-red-400 text-sm">{nameError}</p>}
 
             <button type="submit" className="btn btn-neutral mt-4">
               Resgister

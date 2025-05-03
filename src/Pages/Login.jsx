@@ -1,9 +1,13 @@
-import React, { use } from "react";
-import { Link } from "react-router";
+import React, { use, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const Login = () => {
+  const [error, setError] = useState("");
   const { signInUser } = use(AuthContext);
+
+  const { state } = useLocation();
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -14,9 +18,12 @@ const Login = () => {
     signInUser(email, password)
       .then((result) => {
         const user = result.user;
+        navigate(`${state ? state : "/"}`);
         alert("user sign in successfully", user);
       })
-      .catch((error) => console.log(error));
+      .catch(() => {
+        setError("wrong email or pass");
+      });
   };
 
   return (
@@ -34,6 +41,7 @@ const Login = () => {
               name="email"
               className="input"
               placeholder="Email"
+              required
             />
 
             {/* Password */}
@@ -44,10 +52,13 @@ const Login = () => {
               className="input"
               placeholder="Password"
               autoComplete="yes"
+              required
             />
             <div>
               <a className="link link-hover">Forgot password?</a>
             </div>
+
+            {error && <p className="text-red-400 text-xs">{error}</p>}
 
             <button type="submit" className="btn btn-neutral mt-4">
               Login
