@@ -5,6 +5,7 @@ import CategoryNews from "../Pages/CategoryNews";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import AuthLayout from "../Layouts/AuthLayout";
+import LoadingSpinner from "../Components/LoadingSpinner";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
         path: "/category/:id",
         Component: CategoryNews,
         loader: () => fetch("/news.json"),
+        hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
     ],
   },
