@@ -11,8 +11,8 @@ const Navbar = () => {
       .then(() => {
         alert("you logged out successfully");
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        alert("cannot logout something went wrong");
       });
   };
 

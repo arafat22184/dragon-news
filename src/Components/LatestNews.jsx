@@ -10,7 +10,7 @@ const LatestNews = () => {
           <p className="font-bold text-red-300">
             {" "}
             Jaishankar discusses Pahalgam terror attack with Marco Rubio, calls
-            for justice.
+            for justices.
           </p>
           <p className="font-bold text-blue-300">
             Snake halts Japanese bullet trains after wrapping around power line

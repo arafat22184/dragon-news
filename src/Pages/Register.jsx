@@ -28,7 +28,7 @@ const Register = () => {
           })
           .catch(() => setUser(user));
       })
-      .catch((error) => console.log(error));
+      .catch(() => alert("something went wrong"));
   };
 
   return (
